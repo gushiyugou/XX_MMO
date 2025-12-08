@@ -1,9 +1,9 @@
 
 
 using Google.Protobuf;
-using Proto;
 using System.Net;
 using System.Net.Sockets;
+using System.Numerics;
 
 
 
@@ -20,13 +20,24 @@ socket.Connect(ipe);
 Console.WriteLine("成功连接到服务器");
 
 
-Vector3 v = new Vector3() { X=100, Y=100, Z=100 };
-SendMessage(socket, v.ToByteArray());
+Proto.Vector3 vector = new Proto.Vector3() { X=100, Y=100, Z=100 };
+
+//用户登录消息
+Proto.Package package = new Proto.Package();
+package.Request =new Proto.Request();
+package.Request.UserLogin = new Proto.UserLoginRequest();
+package.Request.UserLogin.Username = "XX";
+package.Request.UserLogin.Password = "12345";
+
+MemoryStream rawOutPut = new MemoryStream();
+CodedOutputStream output = new CodedOutputStream(rawOutPut);
+package.WriteTo(output);
+output.Flush();
+SendMessage(socket, package.ToByteArray());
+
+
 Console.ReadLine();
-// 添加 Vector3 到字节数组的扩展方法
 
-
-// 修改调用处
 
 
 static void SendMessage(Socket socket, byte[] body)

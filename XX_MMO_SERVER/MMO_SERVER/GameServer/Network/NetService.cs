@@ -43,9 +43,9 @@ namespace GameServer.Network
 
         private void OnDataRecevie(NetConnection sender, byte[] data)
         {
-            Vector3 v = Vector3.Parser.ParseFrom(data);
-            Console.WriteLine(v.ToString());
-            MessageRouter.Instance.AddMessage(sender, v);
+            Proto.Package package = Proto.Package.Parser.ParseFrom(data);
+            Console.WriteLine(package.ToString());
+            MessageRouter.Instance.AddMessage(sender, package);
         }
     }
 }

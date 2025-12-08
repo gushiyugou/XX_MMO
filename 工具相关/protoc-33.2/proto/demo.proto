@@ -1,4 +1,5 @@
 syntax = "proto3";//指定版本信息，不指定会报错
+option csharp_namespace = "Proto";
 
 message Person //message为关键字，作用为定义一种消息类型
 {
