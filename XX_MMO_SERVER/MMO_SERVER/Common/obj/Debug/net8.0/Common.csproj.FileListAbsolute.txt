@@ -22,3 +22,4 @@ D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\Common\bin\Debug\net8.0\Common.d
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\Common\bin\Debug\net8.0\Common.dll
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\Common\bin\Debug\net8.0\Common.pdb
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\Common\obj\Debug\net8.0\ref\Common.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\Common\obj\Debug\net8.0\Common.sourcelink.json

@@ -1,6 +1,6 @@
 using System.Net.Sockets;
 
-namespace Network
+namespace Common.Network
 {
     /// <summary>
     /// 这是Socket异步接收器，可以对接收的数据粘包与拆包

@@ -1,6 +1,7 @@
 
 
 using Google.Protobuf;
+using Proto;
 using System.Net;
 using System.Net.Sockets;
 

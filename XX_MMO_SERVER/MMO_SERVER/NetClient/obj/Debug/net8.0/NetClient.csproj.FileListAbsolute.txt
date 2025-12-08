@@ -17,3 +17,4 @@ D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\refin
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetClient.pdb
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetClient.genruntimeconfig.cache
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\ref\NetClient.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetClient.sourcelink.json
