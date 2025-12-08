@@ -32,7 +32,7 @@ namespace GameServer.Network
             //创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
             lfd.dataReceivedHandler += OnDataRectived;
-            lfd.disconnectedHandler += (socket) => disconnectedCallback(this);
+            lfd.disconnectedHandler += (socket) => disconnectedCallback?.Invoke(this);
             lfd.Start();
         }
   
@@ -40,7 +40,7 @@ namespace GameServer.Network
         private void OnDataRectived(byte[] buffer)
         {
             //反序列化(字节转对象)
-            dataReceiveCallback(this,buffer);
+            dataReceiveCallback?.Invoke(this,buffer);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace GameServer.Network
             try { socket.Shutdown(SocketShutdown.Both); } catch { }
             socket.Close();
             socket = null;
-            disconnectedCallback(this);
+            disconnectedCallback?.Invoke(this);
         }
     }
 }
