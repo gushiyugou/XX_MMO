@@ -1,0 +1,38 @@
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.exe
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.deps.json
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.runtimeconfig.json
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.dll
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.pdb
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\Common.dll
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\Common.pdb
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.AssemblyReference.cache
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.AssemblyInfoInputs.cache
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.AssemblyInfo.cs
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.CoreCompileInputs.cache
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.Up2Date
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.dll
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\refint\GameServer.dll
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.pdb
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.genruntimeconfig.cache
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\obj\Debug\net8.0\ref\GameServer.dll
+D:\UnityProject\XX_MMO_SERVER \MMO_SERVER\GameServer\bin\Debug\net8.0\Google.Protobuf.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.AssemblyReference.cache
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.AssemblyInfoInputs.cache
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.AssemblyInfo.cs
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.CoreCompileInputs.cache
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\refint\GameServer.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.pdb
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.exe
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.deps.json
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.runtimeconfig.json
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\GameServer.pdb
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Google.Protobuf.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Common.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Common.pdb
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.csproj.Up2Date
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.genruntimeconfig.cache
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\ref\GameServer.dll

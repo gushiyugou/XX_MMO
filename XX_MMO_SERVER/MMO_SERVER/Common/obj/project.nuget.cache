@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "abWEWe/9qFk=",
+  "success": true,
+  "projectFilePath": "D:\\UnityProject\\XX_MMO\\XX_MMO_SERVER\\MMO_SERVER\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\google.protobuf\\3.33.2\\google.protobuf.3.33.2.nupkg.sha512"
+  ],
+  "logs": []
+}

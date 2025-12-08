@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message User
+{
+    int32 id = 1;       		//id
+    string name = 2;    	//姓名
+    int32 age = 3;   		//年龄
+}
