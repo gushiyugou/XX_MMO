@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NetClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29f1fc2481e921f71e9c259631b3e7c50de0b651")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8cce5309a0e35b4d12b680751c1a2ffab734834")]
 [assembly: System.Reflection.AssemblyProductAttribute("NetClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NetClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

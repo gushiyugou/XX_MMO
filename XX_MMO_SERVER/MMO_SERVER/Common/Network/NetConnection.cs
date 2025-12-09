@@ -1,4 +1,6 @@
 
+using Google.Protobuf;
+using Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace Common.Network
     /// </summary>
     public class NetConnection
     {
+        #region 网络连接属性
         public delegate void DataReceiveCallback(NetConnection sender,byte[] data);
         public delegate void DisconnectedCallback(NetConnection sender);
 
@@ -23,6 +26,10 @@ namespace Common.Network
         private DataReceiveCallback dataReceiveCallback;
         private DisconnectedCallback disconnectedCallback;
 
+        #endregion
+
+
+        #region 连接相关
         public NetConnection(Socket socket,DataReceiveCallback cb1,DisconnectedCallback cb2)
         {
             this.socket = socket;
@@ -53,5 +60,47 @@ namespace Common.Network
             socket = null;
             disconnectedCallback?.Invoke(this);
         }
+
+        #endregion
+
+
+
+        #region 消息发送相关
+        
+
+        public void Send(Package messagePackage)
+        {
+            byte[] data = null;
+            //将messagePackage写入到字节流当中，转换为byte数组
+            using(MemoryStream ms = new MemoryStream())
+            {
+
+                messagePackage.WriteTo(ms);
+                //编码
+                data = new byte[4 + ms.Length];
+                Buffer.BlockCopy(BitConverter.GetBytes(ms.Length), 0, data, 0, 4);
+                Buffer.BlockCopy(ms.GetBuffer(), 0, data, 4, (int)ms.Length);
+            }
+            Send(data,0,data.Length);
+        }
+
+        public void Send(byte[] data,int offset,int count)
+        {
+            lock (this)
+            {
+                if (socket.Connected)
+                {
+                    socket.BeginSend(data, offset, count, SocketFlags.None, new AsyncCallback(SendCallback), socket);
+                }
+            }
+        }
+
+        private void SendCallback(IAsyncResult ar)
+        {
+            int len = socket.EndSend(ar);
+        }
+
+
+        #endregion
     }
 }

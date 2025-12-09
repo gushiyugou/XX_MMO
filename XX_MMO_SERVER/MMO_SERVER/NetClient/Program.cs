@@ -1,5 +1,6 @@
 
 
+using Common.Network;
 using Google.Protobuf;
 using System.Net;
 using System.Net.Sockets;
@@ -29,11 +30,9 @@ package.Request.UserLogin = new Proto.UserLoginRequest();
 package.Request.UserLogin.Username = "XX";
 package.Request.UserLogin.Password = "12345";
 
-MemoryStream rawOutPut = new MemoryStream();
-CodedOutputStream output = new CodedOutputStream(rawOutPut);
-package.WriteTo(output);
-output.Flush();
-SendMessage(socket, package.ToByteArray());
+NetConnection connection = new NetConnection(socket, null, null);
+connection.Send(package);
+
 
 
 Console.ReadLine();
