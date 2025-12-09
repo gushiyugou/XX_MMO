@@ -1,6 +1,6 @@
 
 
-using Common.Network;
+using Summer.Network;
 using Google.Protobuf;
 using System.Net;
 using System.Net.Sockets;
@@ -23,7 +23,7 @@ Console.WriteLine("成功连接到服务器");
 Proto.Vector3 vector = new Proto.Vector3() { X=100, Y=100, Z=100 };
 NetConnection connection = new NetConnection(socket, null, null);
 
-Thread.Sleep(1000);
+Thread.Sleep(100);
 //构建发送
 Proto.Package package = new Proto.Package();
 package.Request =new Proto.Request();

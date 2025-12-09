@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Network
+namespace Summer.Network
 {
     /// <summary>
     /// 用户会话类，主要负责存储用户信息，给客户端发送响应

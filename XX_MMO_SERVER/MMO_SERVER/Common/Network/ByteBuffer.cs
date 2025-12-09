@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Network
+namespace Summer.Network
 {
     /// <summary>
     /// 字节缓冲处理类，仅支持大端模式

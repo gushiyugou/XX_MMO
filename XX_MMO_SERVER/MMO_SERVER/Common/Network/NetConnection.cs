@@ -9,7 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Network
+namespace Summer.Network
 {
     /// <summary>
     /// 客户端网络连接对象

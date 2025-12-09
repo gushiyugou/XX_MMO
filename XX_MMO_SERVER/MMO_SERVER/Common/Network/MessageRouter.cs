@@ -1,5 +1,6 @@
-using Common;
+using Summer;
 using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using Proto;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Network
+namespace Summer.Network
 {
 
     #region 消息单元
@@ -178,22 +179,25 @@ namespace Common.Network
 
         private void executeMessage(NetConnection sender ,IMessage message)
         {
+            //发送消息，马上触发订阅
             var eventTriggerMethod = this.GetType().GetMethod("EventTrigger",
                 BindingFlags.NonPublic | BindingFlags.Instance);
+            //调用泛型方法
+            var met = eventTriggerMethod.MakeGenericMethod(message.GetType());
+            met.Invoke(this, new object[] { sender, message });
+
+
             var type = message.GetType();
             foreach (var t in type.GetProperties())
             {
                 if (t.Name == "Parser" || t.Name == "Descriptor") continue;
-                Console.WriteLine(t.Name);
                 var value = t.GetValue(message);
                 if (value != null)
                 {
                     if (value.GetType().IsAssignableTo(typeof(IMessage)))
                     {
-                        Console.WriteLine("发现消息，触发订阅，继续递归");
-                        //调用泛型方法
-                        var met = eventTriggerMethod.MakeGenericMethod(value.GetType());
-                        met.Invoke(this, new object[] { sender, value });
+                        //Console.WriteLine("发现消息，触发订阅，继续递归");
+                        
                         executeMessage(sender, (IMessage)value);
                     }
                 }
