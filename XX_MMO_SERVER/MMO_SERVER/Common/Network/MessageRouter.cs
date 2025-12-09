@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Summer.Network
 {
@@ -19,10 +19,10 @@ namespace Summer.Network
     /// </summary>
     public class Msg
     {
-        public NetConnection sender;
+        public Connection sender;
         public IMessage message;
 
-        public Msg(NetConnection sender, IMessage message)
+        public Msg(Connection sender, IMessage message)
         {
             this.sender = sender;
             this.message = message;
@@ -47,7 +47,7 @@ namespace Summer.Network
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="message"></param>
-        public delegate void MessageHandler<T>(NetConnection sender,T message);
+        public delegate void MessageHandler<T>(Connection sender,T message);
         /// <summary>
         /// 消息类型（消息频道）
         /// </summary>
@@ -65,7 +65,7 @@ namespace Summer.Network
         /// </summary>
         /// <param name="sender">发送者</param>
         /// <param name="message">消息体</param>
-        public void AddMessage(NetConnection sender, IMessage message)
+        public void AddMessage(Connection sender, IMessage message)
         {
             messageQueue.Enqueue(new Msg(sender, message));
             threadEvent.Set();
@@ -85,7 +85,7 @@ namespace Summer.Network
         }
 
         //消息触发
-        private void EventTrigger<T>(NetConnection sender,T message)
+        private void EventTrigger<T>(Connection sender,T message)
         {
             string type = typeof(T).FullName;
             if (delegateMap.ContainsKey(type))
@@ -177,7 +177,7 @@ namespace Summer.Network
         }
 
 
-        private void executeMessage(NetConnection sender ,IMessage message)
+        private void executeMessage(Connection sender ,IMessage message)
         {
             //发送消息，马上触发订阅
             var eventTriggerMethod = this.GetType().GetMethod("EventTrigger",
@@ -194,10 +194,10 @@ namespace Summer.Network
                 var value = t.GetValue(message);
                 if (value != null)
                 {
-                    if (value.GetType().IsAssignableTo(typeof(IMessage)))
+                    if (typeof(IMessage).IsAssignableFrom(value.GetType()))
                     {
                         //Console.WriteLine("发现消息，触发订阅，继续递归");
-                        
+
                         executeMessage(sender, (IMessage)value);
                     }
                 }

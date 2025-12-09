@@ -34,13 +34,15 @@ namespace Summer.Network
         /// </summary>
         private int mSize = 1024 * 1024;
 
-        //成功收到消息的委托事件
-        public delegate void OnReceived(byte[] data);
-        public event OnReceived dataReceivedHandler;
+        
+        public delegate void DataReceivedEventHandler(byte[] data);
+        public delegate void OnDisconnectedEventHandler();
 
+
+        //成功收到消息的委托事件
+        public event DataReceivedEventHandler DataReceived;
         //连接失败的委托事件
-        public delegate void OnDisconnectedEventHandler(Socket soc);
-        public event OnDisconnectedEventHandler disconnectedHandler;
+        public event OnDisconnectedEventHandler Disconnected;
 
 
         public LengthFieldDecoder(Socket socket, int lengthFieldOffset, int lengthFieldLength)
@@ -147,7 +149,7 @@ namespace Summer.Network
                     mOffect += total;
 
                     //完成一个数据包
-                    dataReceivedHandler?.Invoke(data);
+                    DataReceived?.Invoke(data);
                     //Debug.Log("完成一个数据包");
                 }
 
@@ -165,7 +167,7 @@ namespace Summer.Network
 
         private void _disconnected()
         {
-            disconnectedHandler?.Invoke(mSocket);
+            Disconnected?.Invoke();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Summer;
 
 namespace GameServer.Network
 {
@@ -31,19 +32,20 @@ namespace GameServer.Network
 
         private void OnClientConnected(object? sender, Socket socket)
         {
-            new NetConnection(socket,
-                new NetConnection.DataReceiveCallback(OnDataRecevie),
-                new NetConnection.DisconnectedCallback(OnDisconnected));
+            var connection = new Connection(socket);
+            connection.OnDataReceive += OnDataRecevie;
+            connection.OnDisconnected += OnDisconnected;
         }
 
-        private void OnDisconnected(NetConnection sender)
+        private void OnDisconnected(Connection sender)
         {
             Console.WriteLine("连接断开");
         }
 
-        private void OnDataRecevie(NetConnection sender, byte[] data)
+        private void OnDataRecevie(Connection sender, byte[] data)
         {
-            Proto.Package package = Proto.Package.Parser.ParseFrom(data);
+            Package package = Package.Parser.ParseFrom(data);
+            //Package package = ProtobufTool.Parse<Package>(data);
             MessageRouter.Instance.AddMessage(sender, package);
         }
     }

@@ -23,7 +23,7 @@ namespace GameServer
             Console.ReadKey();
         }
 
-        private static void OnUserLoginRequest(NetConnection sender, UserLoginRequest message)
+        private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
             Console.WriteLine($"发现用户登录请求:用户名={message.Username},用户密码={message.Password}");
         }
