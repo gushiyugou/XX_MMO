@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,9 @@ namespace Common.Network
     public class Msg
     {
         public NetConnection sender;
-        public Package message;
+        public IMessage message;
 
-        public Msg(NetConnection sender, Package message)
+        public Msg(NetConnection sender, IMessage message)
         {
             this.sender = sender;
             this.message = message;
@@ -63,7 +64,7 @@ namespace Common.Network
         /// </summary>
         /// <param name="sender">发送者</param>
         /// <param name="message">消息体</param>
-        public void AddMessage(NetConnection sender, Package message)
+        public void AddMessage(NetConnection sender, IMessage message)
         {
             messageQueue.Enqueue(new Msg(sender, message));
             threadEvent.Set();
@@ -74,7 +75,7 @@ namespace Common.Network
         //订阅(subscribing)
         public void Subscribing<T>(MessageHandler<T> handler) where T :IMessage
         {
-            string key = typeof(T).Name;
+            string key = typeof(T).FullName;
             if (!delegateMap.ContainsKey(key))
             {
                 delegateMap[key] = null;
@@ -85,7 +86,7 @@ namespace Common.Network
         //消息触发
         private void EventTrigger<T>(NetConnection sender,T message)
         {
-            string type = typeof(T).Name;
+            string type = typeof(T).FullName;
             if (delegateMap.ContainsKey(type))
             {
                 MessageHandler<T> handler = (MessageHandler<T>)delegateMap[type];
@@ -100,12 +101,10 @@ namespace Common.Network
                 
             }
         }
-
-
         //退订unsubscribe
         public void Unsubscribing<T>(MessageHandler<T> handler)
         {
-            string key = typeof(T).Name;
+            string key = typeof(T).FullName;
             if (delegateMap.ContainsKey(key))
             {
                 delegateMap[key] = null;
@@ -159,18 +158,11 @@ namespace Common.Network
                         continue;
                     }
                     Msg msg = messageQueue.Dequeue();
-                    Package package = msg.message;
+                    IMessage package = msg.message;
 
                     if(package != null)
                     {
-                        if(package.Request != null)
-                        {
-                            DoRequest(msg.sender,package.Request);
-                        }
-                        if(package.Response != null)
-                        {
-                            DoResponse(msg.sender,package.Response);
-                        }
+                        executeMessage(msg.sender,package);
                     }
                 }
             }
@@ -183,22 +175,62 @@ namespace Common.Network
             Console.WriteLine("Worker Thread End");
         }
 
-        
-        private void DoRequest(NetConnection sender, Request request)
+
+        private void executeMessage(NetConnection sender ,IMessage message)
         {
-            if (request.UserRegister != null) { EventTrigger(sender, request.UserRegister); }
-
-
-            if (request.UserLogin != null) { EventTrigger(sender, request.UserLogin); }
+            var eventTriggerMethod = this.GetType().GetMethod("EventTrigger",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+            var type = message.GetType();
+            foreach (var t in type.GetProperties())
+            {
+                if (t.Name == "Parser" || t.Name == "Descriptor") continue;
+                Console.WriteLine(t.Name);
+                var value = t.GetValue(message);
+                if (value != null)
+                {
+                    if (value.GetType().IsAssignableTo(typeof(IMessage)))
+                    {
+                        Console.WriteLine("发现消息，触发订阅，继续递归");
+                        //调用泛型方法
+                        var met = eventTriggerMethod.MakeGenericMethod(value.GetType());
+                        met.Invoke(this, new object[] { sender, value });
+                        executeMessage(sender, (IMessage)value);
+                    }
+                }
+            }
         }
 
-        private void DoResponse(NetConnection sender, Response response)
-        {
-            if(response.UserRegister != null) { EventTrigger(sender, response.UserRegister); }
 
 
-            if(response.UserLogin != null) { EventTrigger(sender, response.UserLogin); }
-        }
+
+
+            #region 弃用
+        /// <summary>
+        /// 根据反射原理对消息进行自动分发 ,已弃用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="message"></param>
+        //private void Execute(NetConnection sender,object message)
+        //{
+        //    var eventTriggerMethod = this.GetType().GetMethod("EventTrigger",
+        //        BindingFlags.NonPublic | BindingFlags.Instance);
+        //    Type type = message.GetType();
+
+        //    foreach (var t in type.GetProperties())
+        //    {
+        //        if (t.Name == "Parser" || t.Name == "Descriptor") continue;
+        //        var value = t.GetValue(message);
+        //        if (value != null)
+        //        {
+        //            //调用泛型方法
+        //            var met = eventTriggerMethod.MakeGenericMethod(value.GetType());
+        //            met.Invoke(this, new object[] { sender, value });
+        //        }
+        //    }
+        //}
+            #endregion
+
+
         #endregion
 
         #endregion

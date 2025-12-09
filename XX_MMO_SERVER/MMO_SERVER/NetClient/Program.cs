@@ -16,24 +16,27 @@ int port = 32510;
 //服务器终端
 IPEndPoint ipe = new IPEndPoint(IPAddress.Parse(host), port);
 Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-socket.Connect(ipe);
-
+socket.Connect(ipe);//通过服务器IP和端口建立连接
 Console.WriteLine("成功连接到服务器");
 
 
 Proto.Vector3 vector = new Proto.Vector3() { X=100, Y=100, Z=100 };
+NetConnection connection = new NetConnection(socket, null, null);
 
-//用户登录消息
+Thread.Sleep(1000);
+//构建发送
 Proto.Package package = new Proto.Package();
 package.Request =new Proto.Request();
 package.Request.UserLogin = new Proto.UserLoginRequest();
 package.Request.UserLogin.Username = "XX";
 package.Request.UserLogin.Password = "12345";
-
-NetConnection connection = new NetConnection(socket, null, null);
 connection.Send(package);
 
-
+//快捷发送
+connection.Request.UserLogin = new Proto.UserLoginRequest();
+connection.Request.UserLogin.Username = "WYX";
+connection.Request.UserLogin.Password = "12456";
+//connection.Send();
 
 Console.ReadLine();
 

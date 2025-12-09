@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Summer
+namespace Common.Network
 {
     /// <summary>
     /// 字节缓冲处理类，仅支持大端模式

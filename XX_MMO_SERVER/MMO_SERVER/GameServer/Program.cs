@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GameServer
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {

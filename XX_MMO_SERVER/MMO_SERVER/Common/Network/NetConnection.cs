@@ -65,8 +65,51 @@ namespace Common.Network
 
 
 
-        #region 消息发送相关
-        
+        #region 发送网络数据包
+
+            #region 网络数据包属性
+        private Package _package;
+        public Request Request
+        {
+            get
+            {
+
+                if (_package == null)
+                {
+                    _package = new Package();
+                }
+                if(_package.Request == null)
+                {
+                    _package.Request = new Request();
+                }
+                return _package.Request;
+            }
+        }
+        public Response Response
+        {
+            get
+            {
+
+                if (_package == null)
+                {
+                    _package = new Package();
+                }
+                if (_package.Response == null)
+                {
+                    _package.Response = new Response();
+                }
+                return _package.Response;
+            }
+        }
+        #endregion
+
+
+            #region 消息发送
+        public void Send()
+        {
+            if(_package != null) Send(_package);
+            _package = null;
+        }
 
         public void Send(Package messagePackage)
         {
@@ -99,6 +142,8 @@ namespace Common.Network
         {
             int len = socket.EndSend(ar);
         }
+
+            #endregion
 
 
         #endregion
