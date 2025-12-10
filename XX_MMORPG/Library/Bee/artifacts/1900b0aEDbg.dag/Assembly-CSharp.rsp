@@ -348,13 +348,17 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/XX_MMORPG/Plugins/Summer/Network/ByteBuffer.cs"
+"Assets/XX_MMORPG/Plugins/Summer/Network/Connection .cs"
 "Assets/XX_MMORPG/Plugins/Summer/Network/LengthFieldDecoder.cs"
 "Assets/XX_MMORPG/Plugins/Summer/Network/MessageRouter.cs"
-"Assets/XX_MMORPG/Plugins/Summer/Network/NetConnection.cs"
 "Assets/XX_MMORPG/Plugins/Summer/Network/Session.cs"
 "Assets/XX_MMORPG/Plugins/Summer/Proto/Message.cs"
+"Assets/XX_MMORPG/Plugins/Summer/Proto/MyConnection.cs"
+"Assets/XX_MMORPG/Plugins/Summer/ProtobufTool.cs"
 "Assets/XX_MMORPG/Plugins/Summer/Singleton.cs"
 "Assets/XX_MMORPG/Plugins/Summer/Vector3Int.cs"
+"Assets/XX_MMORPG/Scripts/Game/Login/LoginMain.cs"
+"Assets/XX_MMORPG/Scripts/NetClient.cs"
 -langversion:9.0
 /deterministic
 /optimize-

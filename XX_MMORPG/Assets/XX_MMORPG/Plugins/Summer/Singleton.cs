@@ -8,7 +8,7 @@ namespace Summer
 {
     public class Singleton<T> where T : new()
     {
-        private static T? instance;
+        private static T instance;
         public static object lockObj = new object();
         public static T Instance
         {
