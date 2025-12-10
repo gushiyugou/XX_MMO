@@ -37,3 +37,6 @@ D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\Game
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.genruntimeconfig.cache
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\ref\GameServer.dll
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\obj\Debug\net8.0\GameServer.sourcelink.json
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Serilog.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\GameServer\bin\Debug\net8.0\Serilog.Sinks.File.dll

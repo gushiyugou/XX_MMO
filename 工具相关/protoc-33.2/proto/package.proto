@@ -1,0 +1,13 @@
+syntax = "proto3";
+option csharp_namespace = "Proto";
+
+
+
+
+message Package
+{
+    Request request = 1;
+    Response response = 2;
+}
+
+

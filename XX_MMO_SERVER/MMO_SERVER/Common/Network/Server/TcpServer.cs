@@ -1,3 +1,5 @@
+using Common;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +65,7 @@ namespace Summer.Network
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(endPoint);
                 serverSocket.Listen(backlog);
-                Console.WriteLine("开始监听端口：" + endPoint.Port);
+                Log.Debug("开始监听端口：" + endPoint.Port);
 
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.Completed += OnAccept; //当有人连入的时候
@@ -71,7 +73,7 @@ namespace Summer.Network
             }
             else
             {
-                Console.WriteLine("TcpServer is already running");
+                Log.Debug("TcpServer is already running");
             }
         }
 

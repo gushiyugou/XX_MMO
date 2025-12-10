@@ -1,9 +1,0 @@
-syntax = "proto3";
-option csharp_namespace = "Proto";
-
-message Book
-{
-    int32 id = 1;       		//id
-    string name = 2;    	//书名
-    string author = 3;   	//作者
-}

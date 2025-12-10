@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "AW0OY+8jdmE=",
+  "dgSpecHash": "BSnfEi7jQLs=",
   "success": true,
   "projectFilePath": "D:\\UnityProject\\XX_MMO\\XX_MMO_SERVER\\MMO_SERVER\\NetClient\\NetClient.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\google.protobuf\\3.33.2\\google.protobuf.3.33.2.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\google.protobuf\\3.33.2\\google.protobuf.3.33.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

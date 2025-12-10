@@ -91,28 +91,34 @@ namespace Summer.Network
         {
             byte[] data = null;
             //将messagePackage写入到字节流当中，转换为byte数组
-            using(MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
-                int len = (int)ms.Length;
+
                 message.WriteTo(ms);
+                int len = (int)ms.Length;
+
                 //对消息进行编码
                 data = new byte[4 + len];
                 byte[] lenBytes = BitConverter.GetBytes(len);
-                if(!BitConverter.IsLittleEndian) Array.Reverse(lenBytes);
-
+                //BitConverter.IsLittleEndian为true时是小端序，为false时是大端序
+                //为ture时，需要翻转数组转换为大端序的（网络序），在接收时再转成小端序
+                if (!BitConverter.IsLittleEndian) Array.Reverse(lenBytes);
                 //数据的拼装
                 Array.Copy(lenBytes, 0, data, 0, 4);
                 Array.Copy(ms.GetBuffer(), 0, data, 4, len);
                 //Buffer.BlockCopy(BitConverter.GetBytes(ms.Length), 0, data, 0, 4);
                 //Buffer.BlockCopy(ms.GetBuffer(), 0, data, 4, len);
             }
-            Send(data,0,data.Length);
+            Send(data, 0, data.Length);
+
         }
+
 
         public void Send(byte[] data,int offset,int count)
         {
             lock (this)
             {
+
                 if (socket.Connected)
                 {
                     socket.BeginSend(data, offset, count, SocketFlags.None, new AsyncCallback(SendCallback), socket);

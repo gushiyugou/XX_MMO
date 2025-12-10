@@ -125,10 +125,13 @@ namespace Summer.Network
                         return;
                     }
 
+
+                    //注意，通常需要将网络序转换成本机序解码
                     //获取包长度
                     //int bodyLen = ReadInt32BigEndian(mBuffer, mOffect+ lengthFieldOffset);
-                    int bodyLen = BitConverter.ToInt32(mBuffer, mOffect + lengthFieldOffset);
-                    //int bodyLen = GetInt32BE(mBuffer, mOffect + lengthFieldOffset);
+                    int bodyLen = BitConverter.IsLittleEndian?
+                        BitConverter.ToInt32(mBuffer, mOffect + lengthFieldOffset):
+                        GetInt32BE(mBuffer, mOffect + lengthFieldOffset);
                     if (remain < headLen + adj + bodyLen)
                     {
                         //接收的数据不够一个完整的包，继续接收
@@ -175,7 +178,10 @@ namespace Summer.Network
 
         private int GetInt32BE(byte[] data ,int index)
         {
-            return (data[index] << 0x18) | (data[index + 1] << 0x10) | (data[index + 2] << 0x8) | (data[index + 3]);
+            return (data[index] << 24) |
+           (data[index + 1] << 16) |
+           (data[index + 2] << 8) |
+           data[index + 3]; ;
         }
 
         public static int ReadInt32BigEndian(byte[] buffer, int offset)
@@ -192,5 +198,6 @@ namespace Summer.Network
                 return BitConverter.ToInt32(buffer, offset);
             }
         }
+        
     }
 }

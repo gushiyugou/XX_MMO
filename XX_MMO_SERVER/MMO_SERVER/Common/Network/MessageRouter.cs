@@ -9,6 +9,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Common;
+using Serilog;
 
 namespace Summer.Network
 {
@@ -91,7 +93,7 @@ namespace Summer.Network
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine($"MessageRouter.Fire error:{ex.StackTrace}");
+                    Log.Error($"MessageRouter.Fire error:{ex.StackTrace}");
                 }
                 
             }
@@ -141,7 +143,7 @@ namespace Summer.Network
         private void MessageWork(object? state)
         {
 
-            Console.WriteLine("Worker Thread Start");
+            Log.Information("Worker Thread Start");
             try
             {
                 WorkerCount = Interlocked.Increment(ref WorkerCount);
@@ -174,7 +176,7 @@ namespace Summer.Network
             {
                 WorkerCount = Interlocked.Increment(ref WorkerCount);
             }
-            Console.WriteLine("Worker Thread End");
+            Log.Information("Worker Thread End");
         }
 
 

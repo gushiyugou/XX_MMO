@@ -1,12 +1,14 @@
-using Summer.Network;
+using Common;
 using Proto;
+using Serilog;
+using Summer;
+using Summer.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Summer;
 
 namespace GameServer.Network
 {
@@ -33,13 +35,13 @@ namespace GameServer.Network
 
         private void OnClientConnected(Connection connection)
         {
-            Console.WriteLine("有客户端接入");
+            Log.Debug("有客户端接入");
            
         }
 
         private void OnDisconnected(Connection connection)
         {
-            Console.WriteLine("连接断开");
+            Log.Debug("连接断开");
         }
 
         private void OnDataRecevie(Connection sender, byte[] data)

@@ -6,10 +6,19 @@ using System.Net;
 using System.Net.Sockets;
 using System.Numerics;
 using Summer;
+using Common;
+using Serilog;
 
 
 
+#region 初始化日志系统
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug() //debug info warn error
+    .WriteTo.Console()
+    .WriteTo.File("logs\\client-log.text", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
+#endregion
 
 //服务器IP、端口号
 var host = "127.0.0.1";
@@ -19,7 +28,7 @@ int port = 32510;
 IPEndPoint ipe = new IPEndPoint(IPAddress.Parse(host), port);
 Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
 socket.Connect(ipe);//通过服务器IP和端口建立连接
-Console.WriteLine("成功连接到服务器");
+Log.Debug("成功连接到服务器");
 
 
 Proto.Vector3 vector = new Proto.Vector3() { X=100, Y=100, Z=100 };

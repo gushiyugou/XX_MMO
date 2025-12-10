@@ -1,6 +1,8 @@
-using Summer.Network;
+using Common;
 using GameServer.Network;
 using Proto;
+using Serilog;
+using Summer.Network;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,6 +13,18 @@ namespace GameServer
     {
         static void Main(string[] args)
         {
+            #region 初始化日志系统
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug() //debug info warn error
+                .WriteTo.Console()
+                .WriteTo.File("logs\\server-log.text", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            #endregion
+
+
+
+
             int port = 32510;
             NetService netService = new NetService();
             netService.Start();
@@ -28,7 +42,7 @@ namespace GameServer
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
-            Console.WriteLine($"发现用户登录请求:用户名={message.Username},用户密码={message.Password}");
+            Log.Information("发现用户登录请求:用户名={0},用户密码={1}", message.Username, message.Password);
         }
     }
 }

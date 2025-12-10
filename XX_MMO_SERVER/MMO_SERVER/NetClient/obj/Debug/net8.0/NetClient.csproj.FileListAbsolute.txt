@@ -18,3 +18,6 @@ D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetCl
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetClient.genruntimeconfig.cache
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\ref\NetClient.dll
 D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\obj\Debug\net8.0\NetClient.sourcelink.json
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\bin\Debug\net8.0\Serilog.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\UnityProject\XX_MMO\XX_MMO_SERVER\MMO_SERVER\NetClient\bin\Debug\net8.0\Serilog.Sinks.File.dll

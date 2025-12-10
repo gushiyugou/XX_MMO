@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/XX_MMORPG/Scenes/SampleScene.unity
+- path: Assets/XX_MMORPG/Scenes/LoginScenes.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
