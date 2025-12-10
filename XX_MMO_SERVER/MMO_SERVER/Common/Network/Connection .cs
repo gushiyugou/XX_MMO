@@ -98,9 +98,13 @@ namespace Summer.Network
                 //对消息进行编码
                 data = new byte[4 + len];
                 byte[] lenBytes = BitConverter.GetBytes(len);
-                if(BitConverter.IsLittleEndian) Array.Reverse(lenBytes);
+                if(!BitConverter.IsLittleEndian) Array.Reverse(lenBytes);
+
+                //数据的拼装
                 Array.Copy(lenBytes, 0, data, 0, 4);
                 Array.Copy(ms.GetBuffer(), 0, data, 4, len);
+                //Buffer.BlockCopy(BitConverter.GetBytes(ms.Length), 0, data, 0, 4);
+                //Buffer.BlockCopy(ms.GetBuffer(), 0, data, 4, len);
             }
             Send(data,0,data.Length);
         }
