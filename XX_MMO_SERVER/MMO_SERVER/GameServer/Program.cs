@@ -13,14 +13,17 @@ namespace GameServer
         {
             int port = 32510;
             NetService netService = new NetService();
-            netService.Init(port);
             netService.Start();
 
 
             MessageRouter.Instance.Start(4);
 
             MessageRouter.Instance.Subscribing<UserLoginRequest>(OnUserLoginRequest);
-            Console.ReadKey();
+
+            while (true)
+            {
+                Thread.Sleep(1000);
+            }
         }
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)

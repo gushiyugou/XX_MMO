@@ -42,33 +42,27 @@ namespace Summer.Network
         bool Running = false;
         AutoResetEvent threadEvent = new AutoResetEvent(true);//通过set每次可以唤醒一个线程
 
-        /// <summary>
         /// 消息处理器
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="message"></param>
         public delegate void MessageHandler<T>(Connection sender,T message);
-        /// <summary>
+
         /// 消息类型（消息频道）
-        /// </summary>
         private Dictionary<string, Delegate> delegateMap = new Dictionary<string, Delegate>();
-        /// <summary>
+
         /// 消息队列
-        /// </summary>
         private Queue<Msg> messageQueue = new Queue<Msg>();
 
         #endregion
 
         #region 操作相关
-        /// <summary>
         /// 消息入队操作
-        /// </summary>
-        /// <param name="sender">发送者</param>
-        /// <param name="message">消息体</param>
         public void AddMessage(Connection sender, IMessage message)
         {
-            messageQueue.Enqueue(new Msg(sender, message));
+            lock (messageQueue)
+            {
+                messageQueue.Enqueue(new Msg(sender, message));
+            }
             threadEvent.Set();
+
         }
 
         #region 消息响应相关
@@ -118,6 +112,7 @@ namespace Summer.Network
         #region 服务器状态相关
         public void Start(int ThreadCount)
         {
+            if (Running) return;
             Running = true;
             this.ThreadCount = Math.Clamp(ThreadCount, 1, 201);
             for(int i = 0; i< this.ThreadCount; i++)
@@ -158,12 +153,18 @@ namespace Summer.Network
                         threadEvent.WaitOne();
                         continue;
                     }
-                    Msg msg = messageQueue.Dequeue();
-                    IMessage package = msg.message;
 
-                    if(package != null)
+                    Msg msg = null;
+                    lock (messageQueue)
                     {
-                        executeMessage(msg.sender,package);
+                        if(messageQueue.Count == 0) continue;
+                        msg =  messageQueue.Dequeue();
+                    }
+
+                    IMessage package = msg.message;
+                    if (package != null)
+                    {
+                        executeMessage(msg.sender, package);
                     }
                 }
             }

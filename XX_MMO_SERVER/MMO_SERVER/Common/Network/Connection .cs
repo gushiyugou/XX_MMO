@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,8 +22,8 @@ namespace Summer.Network
         public delegate void DataReceiveCallback(Connection sender,byte[] data);
         public delegate void DisconnectedCallback(Connection sender);
 
-
-        public Socket socket;
+        private Socket _socket;
+        public Socket socket { get { return _socket; } }
         public DataReceiveCallback OnDataReceive;
         public DisconnectedCallback OnDisconnected;
 
@@ -32,7 +33,7 @@ namespace Summer.Network
         #region 连接相关
         public Connection(Socket socket)
         {
-            this.socket = socket;
+            _socket = socket;
 
             //创建解码器
             var lfd = new LengthFieldDecoder(socket, 64 * 1024, 0, 4, 0, 4);
@@ -62,7 +63,7 @@ namespace Summer.Network
         {
             try { socket.Shutdown(SocketShutdown.Both); } catch { }
             socket.Close();
-            socket = null;
+            _socket = null;
             OnDisconnected?.Invoke(this);
         }
 
@@ -92,12 +93,14 @@ namespace Summer.Network
             //将messagePackage写入到字节流当中，转换为byte数组
             using(MemoryStream ms = new MemoryStream())
             {
-
+                int len = (int)ms.Length;
                 message.WriteTo(ms);
-                //编码
-                data = new byte[4 + ms.Length];
-                Buffer.BlockCopy(BitConverter.GetBytes(ms.Length), 0, data, 0, 4);
-                Buffer.BlockCopy(ms.GetBuffer(), 0, data, 4, (int)ms.Length);
+                //对消息进行编码
+                data = new byte[4 + len];
+                byte[] lenBytes = BitConverter.GetBytes(len);
+                if(BitConverter.IsLittleEndian) Array.Reverse(lenBytes);
+                Array.Copy(lenBytes, 0, data, 0, 4);
+                Array.Copy(ms.GetBuffer(), 0, data, 4, len);
             }
             Send(data,0,data.Length);
         }

@@ -10,6 +10,7 @@ using Summer;
 
 
 
+
 //服务器IP、端口号
 var host = "127.0.0.1";
 int port = 32510;
@@ -34,15 +35,35 @@ package.Request.UserLogin.Username = "XX";
 package.Request.UserLogin.Password = "12345";
 connection.Send(package);
 
+
 //快捷发送
 connection.Request.UserLogin = new Proto.UserLoginRequest();
 connection.Request.UserLogin.Username = "WYX";
-connection.Request.UserLogin.Password = "12456";
+connection.Request.UserLogin.Password = "pwd";
 connection.Send();
+
+var msg = new Proto.UserLoginRequest();
+msg.Username = "dsajdga";
+msg.Password = "1234568";
+SendRequest(msg);
+
+
 
 Console.ReadLine();
 
-
+void SendRequest(IMessage message)
+{
+    var package = new Proto.Package() { Request = new Proto.Request() };
+    foreach (var p in package.Request.GetType().GetProperties())
+    {
+        if (p.Name == "Parser" || p.Name == "Descriptor") continue;
+        if(p.PropertyType == message.GetType())
+        {
+            p.SetValue(package.Request, message);
+        }
+    }
+    connection.Send(package);
+}
 
 static void SendMessage(Socket socket, byte[] body)
 {

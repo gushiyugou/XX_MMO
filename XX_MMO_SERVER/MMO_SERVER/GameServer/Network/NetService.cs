@@ -15,29 +15,29 @@ namespace GameServer.Network
     /// </summary>
     public class NetService
     {
-        //网络监听器
-        TcpSocketListener listener = null;
-        public NetService() { }
-
-        public void Init(int port)
+        TcpServer tcpServer;
+        public NetService()
         {
-            listener = new TcpSocketListener("0.0.0.0", port);
-            listener.SocketConnected += OnClientConnected;
+            tcpServer = new TcpServer("0.0.0.0", 32510);
+            tcpServer.Connected += OnClientConnected;
+            tcpServer.Disconnected += OnDisconnected;
+            tcpServer.DataReceived += OnDataRecevie;
         }
+
 
         public void Start()
         {
-            listener.Start();
+            tcpServer.Start();
+            MessageRouter.Instance.Start(10);
         }
 
-        private void OnClientConnected(object? sender, Socket socket)
+        private void OnClientConnected(Connection connection)
         {
-            var connection = new Connection(socket);
-            connection.OnDataReceive += OnDataRecevie;
-            connection.OnDisconnected += OnDisconnected;
+            Console.WriteLine("有客户端接入");
+           
         }
 
-        private void OnDisconnected(Connection sender)
+        private void OnDisconnected(Connection connection)
         {
             Console.WriteLine("连接断开");
         }
@@ -45,7 +45,6 @@ namespace GameServer.Network
         private void OnDataRecevie(Connection sender, byte[] data)
         {
             Package package = Package.Parser.ParseFrom(data);
-            //Package package = ProtobufTool.Parse<Package>(data);
             MessageRouter.Instance.AddMessage(sender, package);
         }
     }
