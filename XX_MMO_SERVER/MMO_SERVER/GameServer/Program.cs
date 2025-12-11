@@ -42,7 +42,7 @@ namespace GameServer
 
         private static void OnUserLoginRequest(Connection sender, UserLoginRequest message)
         {
-            Log.Information("发现用户登录请求:用户名={0},用户密码={1}", message.Username, message.Password);
+            //Log.Information("发现用户登录请求:用户名={0},用户密码={1}", message.Username, message.Password);
         }
     }
 }

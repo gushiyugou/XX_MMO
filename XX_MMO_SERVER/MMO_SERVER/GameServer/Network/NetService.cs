@@ -1,4 +1,5 @@
 using Common;
+using Google.Protobuf;
 using Proto;
 using Serilog;
 using Summer;
@@ -44,10 +45,10 @@ namespace GameServer.Network
             Log.Debug("连接断开");
         }
 
-        private void OnDataRecevie(Connection sender, byte[] data)
+        private void OnDataRecevie(Connection sender, IMessage message)
         {
-            Package package = Package.Parser.ParseFrom(data);
-            MessageRouter.Instance.AddMessage(sender, package);
+            //Package package = Package.Parser.ParseFrom(data);
+            MessageRouter.Instance.AddMessage(sender, message);
         }
     }
 }

@@ -19,12 +19,6 @@ message Entity
 }
 
 
-message Package
-{
-    Request request = 1;
-    Response response = 2;
-}
-
 message Request
 {
     UserRegisterRequest userRegister = 1;

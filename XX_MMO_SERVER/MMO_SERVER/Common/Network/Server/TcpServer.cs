@@ -1,4 +1,5 @@
 using Common;
+using Google.Protobuf;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Summer.Network
         /// </summary>
         /// <param name="connection"></param>
         public delegate void ConnectedCallback(Connection connection);
-        public delegate void DataReceivedCallback(Connection connection, byte[] data);
+        public delegate void DataReceivedCallback(Connection connection, IMessage message);
         public delegate void DisconnectedCallback(Connection connection);
 
 

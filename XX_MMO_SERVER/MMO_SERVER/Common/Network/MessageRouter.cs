@@ -41,7 +41,7 @@ namespace Summer.Network
         #region 属性相关
         int ThreadCount = 1;
         int WorkerCount = 0;
-        bool Running = false;
+        public bool Running = false;
         AutoResetEvent threadEvent = new AutoResetEvent(true);//通过set每次可以唤醒一个线程
 
         /// 消息处理器
