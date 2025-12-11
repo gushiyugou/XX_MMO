@@ -41,7 +41,12 @@ namespace Summer.Network
         #region 属性相关
         int ThreadCount = 1;
         int WorkerCount = 0;
-        public bool Running = false;
+        bool running = false;
+        public bool Running
+        {
+            get { return running; }
+        }
+
         AutoResetEvent threadEvent = new AutoResetEvent(true);//通过set每次可以唤醒一个线程
 
         /// 消息处理器
@@ -114,8 +119,8 @@ namespace Summer.Network
         #region 服务器状态相关
         public void Start(int ThreadCount)
         {
-            if (Running) return;
-            Running = true;
+            if (running) return;
+            running = true;
             this.ThreadCount = Math.Clamp(ThreadCount, 1, 201);
             for(int i = 0; i< this.ThreadCount; i++)
             {
@@ -129,7 +134,7 @@ namespace Summer.Network
 
         public void Stop()
         {
-            Running = false;
+            running = false;
             messageQueue.Clear();
             while(WorkerCount > 0)
             {
@@ -147,7 +152,7 @@ namespace Summer.Network
             try
             {
                 WorkerCount = Interlocked.Increment(ref WorkerCount);
-                while (Running)
+                while (running)
                 {
                     if (messageQueue.Count == 0) 
                     {

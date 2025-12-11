@@ -24,7 +24,6 @@ namespace GameServer.Network
             tcpServer = new TcpServer("0.0.0.0", 32510);
             tcpServer.Connected += OnClientConnected;
             tcpServer.Disconnected += OnDisconnected;
-            tcpServer.DataReceived += OnDataRecevie;
         }
 
 
@@ -43,12 +42,6 @@ namespace GameServer.Network
         private void OnDisconnected(Connection connection)
         {
             Log.Debug("连接断开");
-        }
-
-        private void OnDataRecevie(Connection sender, IMessage message)
-        {
-            //Package package = Package.Parser.ParseFrom(data);
-            MessageRouter.Instance.AddMessage(sender, message);
         }
     }
 }

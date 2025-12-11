@@ -50,13 +50,11 @@ namespace Summer.Network
             ushort code = GetUShort(data,0);
             var message = ProtoTool.ParseFrom(code, data, 2, data.Length - 2);
             OnDataReceive?.Invoke(this, message);
-
-            //using (var ds = DataStream.Allocate(data))
-            //{
-            //    ushort code = ds.ReadUShort();
-            //    var message = ProtoTool.ParseFrom(code, data, 2, data.Length - 2);
-            //    OnDataReceive?.Invoke(this, message);
-            //}
+            if (MessageRouter.Instance.Running)
+            {
+                MessageRouter.Instance.AddMessage(this, message);
+            }
+            
         }
 
 
@@ -146,6 +144,14 @@ namespace Summer.Network
         //    var package = Proto.Package.Parser.ParseFrom(data);
         //    var message = ProtoTool.Unpack(package);
         //    OnDataReceive?.Invoke(this, message);
+
+
+            //using (var ds = DataStream.Allocate(data))
+            //{
+            //    ushort code = ds.ReadUShort();
+            //    var message = ProtoTool.ParseFrom(code, data, 2, data.Length - 2);
+            //    OnDataReceive?.Invoke(this, message);
+            //}
         //}
 
 
